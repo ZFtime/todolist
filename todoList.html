@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>todoList</title>
+    <link rel="stylesheet" href="./css/common.css">
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="banner">
+            <div class="inputBox">
+                <input type="text" v-model="inputValue" placeholder="添加Todo" class="inputValue">
+                <button @click="changeContent" class="btn">提交</button>
+            </div>
+            <div class="content">
+                <h2 class="title">代办事项</h2>
+                <span class="list-number">{{listNumber}}</span>
+                <ul>
+                    <li v-for="(item,index) in list" :key="index">
+                        <!-- 使用prevert解决点击第一个input的时候，第二个不会被选中的问题 -->
+                        <input type="checkbox" class="inputCheckbox" @click.prevent="CompletedChangeContent(index)">
+                        <span class="list-span">{{item}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="content Completed">
+                <h2 class="title">已办事项</h2>
+                <span class="list-number">{{CompletedListNumber}}</span>
+                <ul>
+                    <li v-for="(item,index) in CompletedList" class="CompletedLi" :key="index">
+                        <input type="checkbox" v-model="inputCheckbox" class="inputCheckbox ComCheckbox">
+                        <span class="list-span">{{item}}</span>
+                        <span class="deleteCompletedList" @click="deleteCompletedList(index)">-</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.3/vue.min.js"></script>
+    <script src="./js/todolist.js"></script>
+</body>
+
+</html>
